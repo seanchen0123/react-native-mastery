@@ -1,6 +1,10 @@
 import { StyleSheet, View, Text, SafeAreaView, Pressable } from 'react-native'
 import QuestionCard from '../components/QuestionCard'
-import {  FontAwesome6 } from '@expo/vector-icons'
+import { FontAwesome6 } from '@expo/vector-icons'
+import questions from '../questions'
+import Card from '../components/Card'
+
+const question = questions[0]
 
 export default function QuizScreen() {
   return (
@@ -9,13 +13,28 @@ export default function QuizScreen() {
         <View>
           <Text style={styles.title}>Question 1/5</Text>
         </View>
-        <View>
-        <QuestionCard />
-        <Text style={styles.time}>20 sec</Text>
-        </View>
-        <Pressable style={styles.button} onPress={() => alert('Button Pressed')}>
+        {question ? (
+          <View>
+            <QuestionCard question={question} />
+            <Text style={styles.time}>20 sec</Text>
+          </View>
+        ) : (
+          <Card title="Well done">
+            <Text>Correct answers: 3/5</Text>
+            <Text>Best score: 10</Text>
+          </Card>
+        )}
+        <Pressable
+          style={styles.button}
+          onPress={() => alert('Button Pressed')}
+        >
           <Text style={styles.buttonText}>Next</Text>
-          <FontAwesome6 name="arrow-right-long" size={16} color="white" style={styles.buttonIcon} />
+          <FontAwesome6
+            name="arrow-right-long"
+            size={16}
+            color="white"
+            style={styles.buttonIcon}
+          />
         </Pressable>
       </View>
     </SafeAreaView>
@@ -25,7 +44,7 @@ export default function QuizScreen() {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    backgroundColor: '#fdfef4',
+    backgroundColor: '#fdfef4'
   },
   container: {
     flex: 1,
@@ -34,7 +53,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    color: '#005055',
+    color: '#005055'
   },
   time: {
     textAlign: 'center',
