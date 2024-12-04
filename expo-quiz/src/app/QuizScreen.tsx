@@ -1,8 +1,9 @@
-import { StyleSheet, View, Text, SafeAreaView, Pressable } from 'react-native'
-import QuestionCard from '../components/QuestionCard'
+import { StyleSheet, View, Text, SafeAreaView } from 'react-native'
 import { FontAwesome6 } from '@expo/vector-icons'
+import QuestionCard from '../components/QuestionCard'
 import questions from '../questions'
 import Card from '../components/Card'
+import CustomButton from '../components/CustomButton'
 
 const question = questions[0]
 
@@ -10,9 +11,12 @@ export default function QuizScreen() {
   return (
     <SafeAreaView style={styles.page}>
       <View style={styles.container}>
+        {/* Header */}
         <View>
           <Text style={styles.title}>Question 1/5</Text>
         </View>
+
+        {/* Body */}
         {question ? (
           <View>
             <QuestionCard question={question} />
@@ -24,18 +28,15 @@ export default function QuizScreen() {
             <Text>Best score: 10</Text>
           </Card>
         )}
-        <Pressable
-          style={styles.button}
-          onPress={() => alert('Button Pressed')}
-        >
-          <Text style={styles.buttonText}>Next</Text>
-          <FontAwesome6
-            name="arrow-right-long"
-            size={16}
-            color="white"
-            style={styles.buttonIcon}
-          />
-        </Pressable>
+
+        {/* Footer */}
+        <CustomButton
+          title="Next"
+          rightIcon={
+            <FontAwesome6 name="arrow-right-long" size={16} color="white" />
+          }
+          onPress={() => alert('Custom Button pressed')}
+        />
       </View>
     </SafeAreaView>
   )
@@ -60,22 +61,5 @@ const styles = StyleSheet.create({
     color: '#005055',
     marginTop: 14,
     fontWeight: 'bold'
-  },
-  button: {
-    backgroundColor: '#005055',
-    padding: 20,
-    borderRadius: 100,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '500',
-    fontSize: 16,
-    letterSpacing: 1.5
-  },
-  buttonIcon: {
-    position: 'absolute',
-    right: 20
   }
 })
