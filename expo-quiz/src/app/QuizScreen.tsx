@@ -7,6 +7,7 @@ import CustomButton from '../components/CustomButton'
 import { QuizContext, useQuizContext } from '../providers/QuizProvider'
 import { useEffect } from 'react'
 import { useTimer } from '../hooks/useTimer'
+import LottieView from 'lottie-react-native'
 
 export default function QuizScreen() {
   const { question, questionIndex, onNext, score, bestScore, totalQuestion } = useQuizContext()
@@ -41,12 +42,15 @@ export default function QuizScreen() {
             <Text style={styles.time}>{time} sec</Text>
           </View>
         ) : (
+          <>
+          <LottieView source={require('../../assets/party.json')} autoPlay loop style={styles.absoluteFill} />
           <Card title="Well done">
             <Text>
               Correct answers: {score}/{totalQuestion}
             </Text>
             <Text>Best score: {bestScore}</Text>
           </Card>
+          </>
         )}
 
         {/* Footer */}
@@ -79,5 +83,15 @@ const styles = StyleSheet.create({
     color: '#005055',
     marginTop: 14,
     fontWeight: 'bold'
+  },
+  absoluteFill: {
+    position: 'absolute',
+    top: 0, 
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 99
   }
 })
