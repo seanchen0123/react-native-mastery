@@ -15,7 +15,9 @@ export default function QuizScreen() {
   const { time, startTimer, clearTimer } = useTimer(20)
 
   useEffect(() => {
-    startTimer()
+    if (question && questionIndex < questions.length) {
+      startTimer()
+    }
     return () => clearTimer() 
   }, [question])
 
