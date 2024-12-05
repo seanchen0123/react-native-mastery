@@ -8,7 +8,7 @@ import { QuizContext, useQuizContext } from '../providers/QuizProvider'
 
 export default function QuizScreen() {
 
-  const { question, questionIndex, onNext, score, totalQuestion } = useQuizContext()
+  const { question, questionIndex, onNext, score, bestScore, totalQuestion } = useQuizContext()
 
   return (
     <SafeAreaView style={styles.page}>
@@ -29,7 +29,7 @@ export default function QuizScreen() {
         ) : (
           <Card title="Well done">
             <Text>Correct answers: {score}/{totalQuestion}</Text>
-            <Text>Best score: {score}</Text>
+            <Text>Best score: {bestScore}</Text>
           </Card>
         )}
 
