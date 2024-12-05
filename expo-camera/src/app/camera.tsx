@@ -6,6 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import path from 'path'
 import * as FileSystem from 'expo-file-system'
+import { Video } from 'expo-av'
 
 export default function CameraScreen() {
   const [permission, requestPermission] = useCameraPermissions()
@@ -13,6 +14,8 @@ export default function CameraScreen() {
   const [facing, setFacing] = useState<CameraType>('back')
   const camera = useRef<CameraView>(null)
   const [picture, setPicture] = useState<CameraCapturedPicture>()
+  const [isRecording, setIsRecording] = useState(false)
+  const [video, setVideo] = useState<string | undefined>()
 
   useEffect(() => {
     if (permission && !permission.granted && permission.canAskAgain) {
@@ -24,19 +27,38 @@ export default function CameraScreen() {
     setFacing(facing === 'back' ? 'front' : 'back')
   }
 
+  const onPress = async () => {
+    if (isRecording) {
+      camera.current?.stopRecording()
+      // setIsRecording(false)
+    } else {
+      takePicture()
+    }
+  }
+
   const takePicture = async () => {
     const res = await camera.current?.takePictureAsync()
     // console.log(res)
     setPicture(res)
   }
 
-  const saveFile = async (uri: string) => {
+  const startRecording = async () => {
+    setIsRecording(true)
+    const res = await camera.current?.recordAsync({ maxDuration: 60 })
+    console.log(res)
+    setVideo(res?.uri)
+    setIsRecording(false)
+  }
+
+  const saveFile = async (uri: string | undefined) => {
+    if (!uri) return
     const filename = path.parse(uri).base
     await FileSystem.copyAsync({
       from: uri,
-      to: `${FileSystem.documentDirectory}${filename}`,
+      to: `${FileSystem.documentDirectory}${filename}`
     })
     setPicture(undefined)
+    setVideo(undefined)
     router.back()
   }
 
@@ -44,13 +66,14 @@ export default function CameraScreen() {
     return <ActivityIndicator />
   }
 
-  if (picture) {
+  if (picture || video) {
     return (
-      <View style={{flex: 1, backgroundColor: 'black'}}>
-        <Image source={{ uri: picture.uri }} style={{ width: '100%', flex: 1 }} />
-        <View style={{padding: 10}}>
+      <View style={{ flex: 1, backgroundColor: 'black' }}>
+        {picture && <Image source={{ uri: picture.uri }} style={{ width: '100%', flex: 1 }} />}
+        {video && <Video source={{ uri: video }} style={{ width: '100%', flex: 1 }} shouldPlay isLooping />}
+        <View style={{ padding: 10 }}>
           <SafeAreaView edges={['bottom']}>
-            <Button title="Save" onPress={() => saveFile(picture.uri)} />
+            <Button title="Save" onPress={() => saveFile(picture?.uri || video)} />
           </SafeAreaView>
         </View>
         <MaterialIcons
@@ -58,7 +81,10 @@ export default function CameraScreen() {
           size={30}
           color={'white'}
           style={styles.close}
-          onPress={() => setPicture(undefined)}
+          onPress={() => {
+            setPicture(undefined)
+            setVideo(undefined)
+          }}
         />
       </View>
     )
@@ -66,10 +92,14 @@ export default function CameraScreen() {
 
   return (
     <View>
-      <CameraView ref={camera} style={styles.camera} facing={facing}>
+      <CameraView ref={camera} style={styles.camera} facing={facing} mode='video'>
         <View style={styles.footer}>
-          <View style={{width: 50, height: 50}} />
-          <Pressable style={styles.recordButton} onPress={takePicture} />
+          <View style={{ width: 50, height: 50 }} />
+          <Pressable
+            style={[styles.recordButton, { backgroundColor: isRecording ? 'crimson' : 'white' }]}
+            onPress={onPress}
+            onLongPress={startRecording}
+          />
           <MaterialIcons name="flip-camera-ios" size={30} color={'#fff'} onPress={toggleCameraFacing} />
         </View>
       </CameraView>
