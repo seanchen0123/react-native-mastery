@@ -8,18 +8,14 @@ type Props = {
   question: Question
 }
 
-export default function QuestionCard({question}: Props) {
-  
-  const [selectedOption, setSelectedOption] = useState(question.options[0])
-
+export default function QuestionCard({ question }: Props) {
   return (
     <Card title={question.title}>
-      <View style={{gap: 8}}>
+      <View style={{ gap: 8 }}>
         {question.options.map((item, index) => (
-          <AnswerOption option={item} key={index} isSelected={selectedOption === item} onPress={setSelectedOption}  />
+          <AnswerOption option={item} key={index} />
         ))}
       </View>
     </Card>
   )
 }
-

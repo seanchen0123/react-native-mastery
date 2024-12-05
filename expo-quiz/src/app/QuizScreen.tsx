@@ -4,18 +4,11 @@ import QuestionCard from '../components/QuestionCard'
 import questions from '../questions'
 import Card from '../components/Card'
 import CustomButton from '../components/CustomButton'
-import { useState } from 'react'
+import { QuizContext, useQuizContext } from '../providers/QuizProvider'
 
 export default function QuizScreen() {
-  const [questionIndex, setQuestionIndex] = useState(0)
-  const question = questions[questionIndex]
 
-  const onNext = () => {
-    if (questionIndex > questions.length - 1) {
-      return
-    }
-    setQuestionIndex(prev => prev + 1)
-  }
+  const { question, questionIndex, onNext, score, totalQuestion } = useQuizContext()
 
   return (
     <SafeAreaView style={styles.page}>
@@ -23,7 +16,7 @@ export default function QuizScreen() {
         {/* Header */}
         <View>
           <Text style={styles.title}>
-            Question {questionIndex === questions.length ? questions.length : questionIndex + 1}/5
+            Question {questionIndex === questions.length ? questions.length : questionIndex + 1}/{totalQuestion}
           </Text>
         </View>
 
@@ -35,8 +28,8 @@ export default function QuizScreen() {
           </View>
         ) : (
           <Card title="Well done">
-            <Text>Correct answers: 3/5</Text>
-            <Text>Best score: 10</Text>
+            <Text>Correct answers: {score}/{totalQuestion}</Text>
+            <Text>Best score: {score}</Text>
           </Card>
         )}
 
