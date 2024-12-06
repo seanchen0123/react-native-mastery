@@ -30,7 +30,7 @@ export default function CameraScreen() {
   const onPress = async () => {
     if (isRecording) {
       camera.current?.stopRecording()
-      // setIsRecording(false)
+      setIsRecording(false)
     } else {
       takePicture()
     }

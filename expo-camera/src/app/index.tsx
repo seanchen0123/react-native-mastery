@@ -28,6 +28,7 @@ export default function HomeScreen() {
       res.map(file => ({ name: file, uri: `${FileSystem.documentDirectory}${file}`, type: getMediaType(file) }))
     )
   }
+  
   return (
     <View style={styles.container}>
       <FlatList
