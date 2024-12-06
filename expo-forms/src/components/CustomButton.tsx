@@ -3,8 +3,8 @@ import { ReactNode, ComponentProps, forwardRef } from 'react'
 
 type CustomButtonProps = {
   title: string
-  rightIcon?: ReactNode,
-  style: StyleProp<ViewStyle>
+  rightIcon?: ReactNode
+  style?: StyleProp<ViewStyle>
 } & Omit<ComponentProps<typeof Pressable>, 'ref'>
 
 export default forwardRef<any, CustomButtonProps>(function CustomButton({ title, rightIcon, style, ...pressableProps }, ref) {
