@@ -11,7 +11,8 @@ export const PersonalInfoSchema = z.object({
   city: z.string().trim().min(1, { message: 'city is required' }),
   postcode: z.string().min(1, { message: 'postcode is required' }),
   country: z.string().min(1, { message: 'country is required' }),
-  phone: z.string().min(1, { message: 'phone number is required' })
+  phone: z.string().min(1, { message: 'phone number is required' }),
+  birthday: z.date()
 })
 export type PersonalInfo = z.infer<typeof PersonalInfoSchema>
 

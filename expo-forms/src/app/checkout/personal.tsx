@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { PersonalInfo, PersonalInfoSchema, useCheckoutContext } from '../context/CheckoutFormProvider'
 import countries from '../../../assets/countries.json'
 import CustomPicker from '../../components/CustomPicker'
+import CustomDateTimePicker from '../../components/CustomDateTimePicker'
 
 export default function PersonalDetailForm() {
   const { setPersonalInfo, personalInfo } = useCheckoutContext()
@@ -41,6 +42,7 @@ export default function PersonalDetailForm() {
           <CustomTextInput name="postcode" label="Post cde" placeholder="420000" containerStyle={{ flex: 1 }} />
         </View>
         <CustomTextInput name="phone" label="Phone number" inputMode="numeric" placeholder="13312345678" />
+        <CustomDateTimePicker name="birthday" label="Birthday" />
         <CustomButton title="Next" style={styles.button} onPress={form.handleSubmit(onNext)} />
       </FormProvider>
     </KeyboardAwareScrollView>
