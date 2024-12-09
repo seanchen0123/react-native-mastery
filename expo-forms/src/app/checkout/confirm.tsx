@@ -20,7 +20,7 @@ export default function ConfirmForm() {
             </View>
             {Object.entries(personalInfo).map(([key, value]) => (
               <Text key={key}>
-                {key}: <Text style={{ color: '#333', fontWeight: '500' }}>{value}</Text>
+                {key}: <Text style={{ color: '#333', fontWeight: '500' }}>{value.toString()}</Text>
               </Text>
             ))}
           </View>
@@ -35,7 +35,7 @@ export default function ConfirmForm() {
             </View>
             {Object.entries(paymentInfo).map(([key, value]) => (
               <Text key={key}>
-                {key}: <Text style={{ color: '#333', fontWeight: '500' }}>{value}</Text>
+                {key}: <Text style={{ color: '#333', fontWeight: '500' }}>{value.toString()}</Text>
               </Text>
             ))}
           </View>

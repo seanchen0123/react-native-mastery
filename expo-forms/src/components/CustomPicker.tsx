@@ -5,9 +5,10 @@ import RNPickerSelect from 'react-native-picker-select'
 
 type CustomePicker = {
   name: string
+  label?: string
 } & Omit<ComponentProps<typeof RNPickerSelect>, 'onValueChange'>
 
-export default function CustomPicker({ name, ...pickerProps }: CustomePicker) {
+export default function CustomPicker({ name, label, ...pickerProps }: CustomePicker) {
   const {
     field: { value, onChange, onBlur },
     fieldState: { error }
@@ -15,6 +16,16 @@ export default function CustomPicker({ name, ...pickerProps }: CustomePicker) {
 
   return (
     <View>
+      {label && (
+        <Text
+          style={{
+            fontWeight: '600',
+            color: 'dimgray'
+          }}
+        >
+          {label}
+        </Text>
+      )}
       <RNPickerSelect
         {...pickerProps}
         value={value}

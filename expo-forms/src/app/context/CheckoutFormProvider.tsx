@@ -21,7 +21,8 @@ export const PaymentInfoSchema = z.object({
   expireDate: z
     .string({ message: 'Expire date is required' })
     .regex(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/, 'Please use the MM/YY format'),
-  cvv: z.coerce.number().min(100).max(999)
+  cvv: z.coerce.number().min(100).max(999),
+  saveCard: z.boolean().optional()
 })
 export type PaymentInfo = z.infer<typeof PaymentInfoSchema>
 
