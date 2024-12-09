@@ -7,6 +7,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PaymentInfo, PaymentInfoSchema, useCheckoutContext } from '../context/CheckoutFormProvider'
 import CustomCheckbox from '../../components/CustomCheckbox'
+import CustomSwitch from '../../components/CustomSwitch'
 
 
 export default function PaymentDetailForm() {
@@ -32,6 +33,7 @@ export default function PaymentDetailForm() {
           <CustomTextInput name="cvv" label="cvv" placeholder="123" inputMode="numeric" containerStyle={{ flex: 1 }} />
         </View>
         <CustomCheckbox name="saveCard" label="Save credit card" />
+        <CustomSwitch name='switchValue' label='On or off?' />
         <CustomButton title="Next" style={styles.button} onPress={form.handleSubmit(onNext)} />
       </FormProvider>
     </KeyboardAwareScrollView>

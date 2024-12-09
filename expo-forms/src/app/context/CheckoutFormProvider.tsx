@@ -1,6 +1,5 @@
 import { createContext, PropsWithChildren, useContext, useState } from 'react'
 import * as z from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { router } from 'expo-router'
 
 export const PersonalInfoSchema = z.object({
@@ -22,7 +21,8 @@ export const PaymentInfoSchema = z.object({
     .string({ message: 'Expire date is required' })
     .regex(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/, 'Please use the MM/YY format'),
   cvv: z.coerce.number().min(100).max(999),
-  saveCard: z.boolean().optional()
+  saveCard: z.boolean().optional(),
+  switchValue: z.boolean().optional()
 })
 export type PaymentInfo = z.infer<typeof PaymentInfoSchema>
 
