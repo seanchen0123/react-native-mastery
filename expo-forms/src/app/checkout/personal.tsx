@@ -9,10 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 const PersonalInfoSchema = z.object({
   fullName: z.string({ message: 'Full name is required'}).min(3, {message: 'Full name must be at least 3 character long'}).trim(),
-  address: z.string({message: 'Please provide your address'}).trim(),
-  city: z.string({ message: 'city is required'}).trim(),
-  postcode: z.string({message: 'postcode is required'}),
-  phone: z.string({ message: 'phone number is required'})
+  address: z.string().trim().min(1, {message: 'Please provide your address'}),
+  city: z.string().trim().min(1, { message: 'city is required'}),
+  postcode: z.string().min(1, {message: 'postcode is required'}),
+  phone: z.string().min(1, { message: 'phone number is required'})
 })
 
 type PersonalInfo = z.infer<typeof PersonalInfoSchema>
@@ -36,7 +36,7 @@ export default function PersonalDetailForm() {
           <CustomTextInput name="city" label="City" placeholder="Wuhan" containerStyle={{ flex: 1 }} />
           <CustomTextInput name="postcode" label="Post cde" placeholder="420000" containerStyle={{ flex: 1 }} />
         </View>
-        <CustomTextInput name="phone" label="Phone number" placeholder="13312345678" />
+        <CustomTextInput name="phone" label="Phone number" inputMode='numeric' placeholder="13312345678" />
         <CustomButton title="Next" style={styles.button} onPress={form.handleSubmit(onNext)} />
       </FormProvider>
     </KeyboardAwareScrollView>
