@@ -4,26 +4,20 @@ import CustomButton from '../../components/CustomButton'
 import CustomTextInput from '../../components/CustomTextInput'
 import KeyboardAwareScrollView from '../../components/KeyboardAwareScrollView'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-
-const PersonalInfoSchema = z.object({
-  fullName: z.string({ message: 'Full name is required'}).min(3, {message: 'Full name must be at least 3 character long'}).trim(),
-  address: z.string().trim().min(1, {message: 'Please provide your address'}),
-  city: z.string().trim().min(1, { message: 'city is required'}),
-  postcode: z.string().min(1, {message: 'postcode is required'}),
-  phone: z.string().min(1, { message: 'phone number is required'})
-})
-
-type PersonalInfo = z.infer<typeof PersonalInfoSchema>
+import { PersonalInfo, PersonalInfoSchema, useCheckoutContext } from '../context/CheckoutFormProvider'
 
 export default function PersonalDetailForm() {
+
+  const { setPersonalInfo, personalInfo } = useCheckoutContext()
+
   const form = useForm<PersonalInfo>({
-    resolver: zodResolver(PersonalInfoSchema)
+    resolver: zodResolver(PersonalInfoSchema),
+    defaultValues: personalInfo
   })
 
   const onNext: SubmitHandler<PersonalInfo> = data => {
-    console.log(data)
+    setPersonalInfo(data)
     router.push('/checkout/payment')
   }
 
