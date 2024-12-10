@@ -13,7 +13,7 @@ export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItemPro
       <Text className="text-white text-xl font-bold">{exercise.name}</Text>
       <View className="flex-row items-center justify-between bg-zinc-800 pt-4 pb-2 px-4">
         <Text className="text-white font-semibold">Set</Text>
-        <View className='flex-row'>
+        <View className="flex-row">
           <Text className="w-16 text-center text-white font-semibold">Kg</Text>
           <Text className="w-16 text-center text-white font-semibold">Reps</Text>
         </View>
@@ -23,7 +23,7 @@ export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItemPro
           <SetItem set={item} order={index + 1} key={index} />
         ))}
       </View>
-      <CustomButton title="Adding set" className=' bg-transparent' titleClass='text-teal-400' />
+      <CustomButton title="Adding set" className=" bg-transparent" titleClass="text-teal-400" />
     </View>
   )
 }

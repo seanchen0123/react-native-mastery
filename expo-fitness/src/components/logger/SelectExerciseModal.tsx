@@ -12,9 +12,9 @@ export default function SelectExerciseModal({ onSelectExercise }: SelectExercise
   const [modalVisible, setModalVisible] = useState(false)
 
   return (
-    <View className="flex-1 bg-zinc-950 ">
+    <View>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <SafeAreaView className=" bg-zinc-900 flex-1 rounded-sm" edges={['top']}>
+        <SafeAreaView className="mt-8 bg-zinc-900 flex-1 rounded-sm" edges={['top']}>
           <View className="pr-4 flex-row items-center justify-between">
             <Text className="text-2xl font-bold text-teal-400 p-4">Select Exercise</Text>
             <FontAwesome6

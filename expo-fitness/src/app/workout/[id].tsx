@@ -27,7 +27,7 @@ export default function WorkoutScreen() {
       <FlatList
         data={workout.exercises}
         contentContainerStyle={{ padding: 8, gap: 8 }}
-        renderItem={() => <WorkoutExerciseItem />}
+        renderItem={({item}) => <WorkoutExerciseItem exercise={item} />}
         ListHeaderComponent={() => (
           <>
             <Text className="text-3xl text-white font-bold">Workout Detail</Text>
