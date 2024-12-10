@@ -20,8 +20,7 @@ export default function WorkoutScreen() {
   return (
     <View className="flex-1 bg-zinc-950">
       <Stack.Screen
-        options={{
-          title: 'Workout Detail',
+        options={{          title: 'Workout Detail',
           headerBackButtonDisplayMode: 'minimal'
         }}
       />
