@@ -1,6 +1,6 @@
 import { WorkoutWithExercises } from '../types/models'
 import * as Crypto from 'expo-crypto'
-import { getExerciseTotalWeight } from './exerciseService'
+import { cleanExercise, getExerciseTotalWeight } from './exerciseService'
 
 export const getWorkoutTotalWeight = (workout: WorkoutWithExercises) => {
   return workout.exercises.reduce((total, exercise) => total + getExerciseTotalWeight(exercise), 0)
@@ -17,9 +17,19 @@ export const newWorkout = () => {
 }
 
 export const finishWorkout = (workout: WorkoutWithExercises) => {
+  const cleanedWorkout = cleanWorkout(workout)
+
   const finishedWorkout: WorkoutWithExercises = {
-    ...workout,
+    ...cleanedWorkout,
     finishedAt: new Date()
   }
   return finishedWorkout
+}
+
+export const cleanWorkout = (workout: WorkoutWithExercises) => {
+  const cleanedExercise = workout.exercises.map(cleanExercise).filter(e => e !== null)
+  return {
+    ...workout,
+    exercises: cleanedExercise
+  }
 }
