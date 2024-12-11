@@ -1,6 +1,6 @@
-import { Pressable, Text, StyleSheet, View, StyleProp, ViewStyle, TextStyle, TouchableOpacity } from 'react-native'
+import { Pressable, Text, View, StyleProp, ViewStyle, TextStyle } from 'react-native'
 import { ReactNode, ComponentProps, forwardRef } from 'react'
-import { clsx } from 'clsx'
+import { cn } from '../lib/utils'
 
 type CustomButtonProps = {
   title: string
@@ -18,10 +18,10 @@ export default forwardRef<any, CustomButtonProps>(function CustomButton(
     <Pressable
       {...pressableProps}
       ref={ref}
-      className={clsx('justify-center items-center', className, 'px-5 py-4 bg-teal-400')}
+      className={cn('justify-center items-center px-5 py-4 bg-teal-400', className)}
       style={styles}
     >
-      <Text className={clsx(titleClass, 'text-zinc-800 font-semibold text-lg')}>{title}</Text>
+      <Text className={cn('text-zinc-800 font-semibold text-lg', titleClass)}>{title}</Text>
       <View className=" absolute right-5">{rightIcon}</View>
     </Pressable>
   )

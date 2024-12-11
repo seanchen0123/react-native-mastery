@@ -10,7 +10,7 @@ type WorkoutExerciseItemProps = {
 export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItemProps) {
   return (
     <View className=" border-l-4 border-teal-400 rounded-sm px-4 pt-3 bg-zinc-900">
-      <Text className="text-white text-xl font-bold">{exercise.name}</Text>
+      <Text className="mb-2 text-white text-xl font-bold">{exercise.name}</Text>
       <View className="flex-row items-center justify-between bg-zinc-800 pt-4 pb-2 px-4">
         <Text className="text-white font-semibold">Set</Text>
         <View className="flex-row">
