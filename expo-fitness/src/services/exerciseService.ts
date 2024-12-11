@@ -1,5 +1,5 @@
 import { ExerciseWithSets } from '../types/models'
-import { getSetTotalWeight } from './setService'
+import { createNewSet, getSetTotalWeight } from './setService'
 import * as Crypto from 'expo-crypto'
 
 export const getExerciseTotalWeight = (exercise: ExerciseWithSets) => {
@@ -11,10 +11,9 @@ export const createExercise = (name: string, workoutId: string) => {
     id: Crypto.randomUUID(),
     name,
     workoutId,
-    sets: [
-      { id: Crypto.randomUUID(), exerciseId: 'e1', weight: 20, reps: 5, oneRM: 0 },
-      { id: Crypto.randomUUID(), exerciseId: 'e2', weight: 10, reps: 10, oneRM: 0 },
-    ]
+    sets: []
   }
+  // add one empty set
+  newExercise.sets.push(createNewSet(newExercise.id))
   return newExercise
 }

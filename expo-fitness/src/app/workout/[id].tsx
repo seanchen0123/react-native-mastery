@@ -2,7 +2,7 @@ import { Stack, useLocalSearchParams } from 'expo-router'
 import { View, Text, FlatList } from 'react-native'
 import dayjs from 'dayjs'
 import { useWorkouts } from '../../store'
-import WorkoutExerciseItem from '../../components/logger/WorkoutExerciseItem'
+import WorkoutExerciseDetailItem from '../../components/logger/WorkoutExerciseDetailItem'
 
 export default function WorkoutScreen() {
   const { id } = useLocalSearchParams()
@@ -19,15 +19,11 @@ export default function WorkoutScreen() {
 
   return (
     <View className="flex-1 bg-zinc-950">
-      <Stack.Screen
-        options={{          title: 'Workout Detail',
-          headerBackButtonDisplayMode: 'minimal'
-        }}
-      />
+      <Stack.Screen options={{ title: 'Workout Detail', headerBackButtonDisplayMode: 'minimal' }} />
       <FlatList
         data={workout.exercises}
         contentContainerStyle={{ padding: 8, gap: 8 }}
-        renderItem={({item}) => <WorkoutExerciseItem exercise={item} />}
+        renderItem={({ item }) => <WorkoutExerciseDetailItem exercise={item} />}
         ListHeaderComponent={() => (
           <>
             <Text className="text-3xl text-white font-bold">Workout Detail</Text>
