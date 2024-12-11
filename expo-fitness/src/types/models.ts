@@ -4,24 +4,24 @@ export type Workout = {
   finishedAt: Date | null
 }
 
-export type Exercie = {
+export type Exercise = {
   id: string
   workoutId: string
   name: string
 }
 
-export type ExercieSet = {
+export type ExerciseSet = {
   id: string
-  workoutId: string
+  exerciseId: string
   reps?: number
   weight?: number
   oneRM?: number
 }
 
-export type ExercieWithSets = Exercie & {
-  sets: ExercieSet[]
+export type ExerciseWithSets = Exercise & {
+  sets: ExerciseSet[]
 }
 
 export type WorkoutWithExercises = Workout & {
-  exercises: ExercieWithSets[]
+  exercises: ExerciseWithSets[]
 }

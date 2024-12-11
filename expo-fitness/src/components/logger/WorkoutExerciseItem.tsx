@@ -1,10 +1,10 @@
 import { Text, View } from 'react-native'
 import CustomButton from '../CustomButton'
-import { ExercieWithSets } from '../../types/models'
+import { ExerciseWithSets } from '../../types/models'
 import SetItem from './SetItem'
 
 type WorkoutExerciseItemProps = {
-  exercise: ExercieWithSets
+  exercise: ExerciseWithSets
 }
 
 export default function WorkoutExerciseItem({ exercise }: WorkoutExerciseItemProps) {
